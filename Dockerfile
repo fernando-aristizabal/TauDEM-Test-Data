@@ -18,7 +18,7 @@ ARG taudem_acc_bin_dir=$taudem_acc_dir/build/bin
 ENV taudem_acc_bin_dir=$taudem_acc_bin_dir
 
 # TauDEM testing variables
-ARG taudem_tests_commit=master
+ARG taudem_tests_commit=taudem_compare
 ARG taudem_tests_dirs=/tests
 ENV taudem_tests_dirs=$taudem_tests_dirs
 
