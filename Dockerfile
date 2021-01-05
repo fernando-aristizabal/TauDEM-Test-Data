@@ -30,11 +30,11 @@ RUN apt-get --fix-missing update \
     mpich=3.3.2-2build1 \
     gdal-bin=3.0.4+dfsg-1build3 \
     libgdal-dev=3.0.4+dfsg-1build3 \
-    #libgtest-dev \
-    #libboost-test-dev \
-    #libnetcdf-dev \
-    #libgeos-dev=3.8.0-1build1 \
+    python3-pip=20.0.2-5ubuntu1.1 \
     && rm -rf /var/lib/apt/lists/* 
+
+# Install Python modules
+RUN pip3 install rasterio==1.1.8 
 
 # clone taudem 
 RUN git clone https://github.com/fernandoa123/cybergis-toolkit.git $cybergis_dir
@@ -78,5 +78,7 @@ RUN cd $taudem_tests_dirs \
     && git checkout $taudem_tests_commit \
     && bash Input/prepare-test-env.sh
 
+# add environment setting for python
+ENV PYTHONUNBUFFERED=TRUE
 
 

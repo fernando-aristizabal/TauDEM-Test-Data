@@ -7,4 +7,5 @@ This branch seeks to test the accelerated flow direction algorithms within the [
 1. Go to the [Docker website](https://docs.docker.com/get-docker/) to install Docker on your host machine.
 2. Clone this fork of the TauDEM testing repository: `git clone -b taudem_compare https://github.com/fernando-aristizabal/TauDEM-Test-Data.git <source_code_dir>`
 3. Build the testing Docker image (may need to run as sudo): `docker build -t taudem_compare <source_code_dir>`
-4. Run the tests on the TauDEM dev and TauDEM acc repos (may need to run as sudo): `docker run --rm -it taudem_compare /bin/bash test_taudem_and_accelerated_repos.sh`
+4. Run the tests for non-zero exit codes on the TauDEM dev and TauDEM acc repos (may need to run as sudo): `docker run --rm -it taudem_compare /bin/bash test_taudem_and_accelerated_repos.sh`
+5. Run the tests to compare outputs of d8flowdir and dinfflowdir within both TauDEM dev and TauDEM acc repos to reference results (may need to run as sudo): `docker run --rm -it taudem_compare /bin/bash compare_outputs.sh`

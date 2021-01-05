@@ -15,7 +15,7 @@ sleep 4
 bats taudem-tests.sh
 
 # add path to taudem acclerated
-PATH=$taudem_acc_bin_dir:$PATH
+PATH=$taudem_acc_bin_dir:$ORIG_PATH
 
 # run tests on acc taudem
 echo "##### TAUDEM ACC TESTING ######"
