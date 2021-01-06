@@ -35,35 +35,37 @@ for pd in ${taudem_versions_dirs[*]}; do
         
         for n in ${num_of_processes[@]}; do 
             
-            echo -e "\n"$a_name $a_angle_arg $a_slope_arg $n; sleep 2
-
             # filled versions
+            echo -e "\nRepo: $p | FD: $a_name | MPI: $n | Data: loganFilled"; sleep 1
             specific_ref_dir=Base
             specific_ref_dir_fp=$reference_dir/$specific_ref_dir
             echo -e "\nmpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel.tif -$a_angle_arg $temp_dir/logan"$a_angle_arg"_"$p"_"$n".tif -$a_slope_arg $temp_dir/logan"$a_slope_arg"_"$p"_"$n".tif"
             mpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel.tif -$a_angle_arg $temp_dir/logan"$a_angle_arg"_"$p"_"$n".tif -$a_slope_arg $temp_dir/logan"$a_slope_arg"_"$p"_"$n".tif 
-            compare_rasters.py $specific_ref_dir_fp/logan"$a_angle_arg".tif $temp_dir/logan"$a_angle_arg"_"$p"_"$n".tif || exit 1
-            compare_rasters.py $specific_ref_dir_fp/logan"$a_slope_arg".tif $temp_dir/logan"$a_slope_arg"_"$p"_"$n".tif || exit 1
+            compare_rasters.py $specific_ref_dir_fp/logan"$a_angle_arg".tif $temp_dir/logan"$a_angle_arg"_"$p"_"$n".tif 
+            compare_rasters.py $specific_ref_dir_fp/logan"$a_slope_arg".tif $temp_dir/logan"$a_slope_arg"_"$p"_"$n".tif 
             
             # not filled versions
+            echo -e "\nRepo: $p | FD: $a_name | MPI: $n | Data: logan not-filled"; sleep 1
             echo -e "\nmpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/logan.tif -$a_angle_arg $temp_dir/logan"$flow_angle_arg"nf_"$p"_"$n".tif -$a_slope_arg $temp_dir/logan"$flow_slope_arg"nf_"$p"_"$n".tif"
             mpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/logan.tif -$a_angle_arg $temp_dir/logan"$a_angle_arg"nf_"$p"_"$n".tif -$a_slope_arg $temp_dir/logan"$a_slope_arg"nf_"$p"_"$n".tif 
-            compare_rasters.py $specific_ref_dir_fp/logan"$a_angle_arg"nf.tif $temp_dir/logan"$a_angle_arg"nf_"$p"_"$n".tif || exit 1
-            compare_rasters.py $specific_ref_dir_fp/logan"$a_slope_arg"nf.tif $temp_dir/logan"$a_slope_arg"nf_"$p"_"$n".tif || exit 1
+            compare_rasters.py $specific_ref_dir_fp/logan"$a_angle_arg"nf.tif $temp_dir/logan"$a_angle_arg"nf_"$p"_"$n".tif 
+            compare_rasters.py $specific_ref_dir_fp/logan"$a_slope_arg"nf.tif $temp_dir/logan"$a_slope_arg"nf_"$p"_"$n".tif 
 
             specific_ref_dir=Geographic
+            echo -e "\nRepo: $p | FD: $a_name | MPI: $n | Data: enogeo"; sleep 1
             specific_ref_dir_fp=$reference_dir/$specific_ref_dir
             echo -e "\nmpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/enogeofel.tif -$a_angle_arg $temp_dir/enogeo"$a_angle_arg"_"$p"_"$n".tif -$a_slope_arg $temp_dir/enogeo"$a_slope_arg"_"$p"_"$n".tif"
             mpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/enogeofel.tif -$a_angle_arg $temp_dir/enogeo"$a_angle_arg"_"$p"_"$n".tif -$a_slope_arg $temp_dir/enogeo"$a_slope_arg"_"$p"_"$n".tif 
-            compare_rasters.py $specific_ref_dir_fp/enogeo"$a_angle_arg".tif $temp_dir/enogeo"$a_angle_arg"_"$p"_"$n".tif || exit 1
-            compare_rasters.py $specific_ref_dir_fp/enogeo"$a_slope_arg".tif $temp_dir/enogeo"$a_slope_arg"_"$p"_"$n".tif || exit 1
+            compare_rasters.py $specific_ref_dir_fp/enogeo"$a_angle_arg".tif $temp_dir/enogeo"$a_angle_arg"_"$p"_"$n".tif 
+            compare_rasters.py $specific_ref_dir_fp/enogeo"$a_slope_arg".tif $temp_dir/enogeo"$a_slope_arg"_"$p"_"$n".tif 
 
-            specific_ref_dir=gridtypes
-            specific_ref_dir_fp=$reference_dir/$specific_ref_dir
-            echo -e "\nmpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel1.bin -$a_angle_arg $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil -$a_slope_arg $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin"
-            mpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel1.bin -$a_angle_arg $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil -$a_slope_arg $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin
-            compare_rasters.py $specific_ref_dir_fp/bil"$a_angle_arg".bil $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil || exit 1
-            compare_rasters.py $specific_ref_dir_fp/bin"$a_slope_arg".bin $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin || exit 1
+            #echo -e "\nRepo: $p | FD: $a_name | MPI: $n | Data: loganfel1"; sleep 1
+            #specific_ref_dir=gridtypes
+            #specific_ref_dir_fp=$reference_dir/$specific_ref_dir
+            #echo -e "\nmpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel1.bin -$a_angle_arg $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil -$a_slope_arg $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin"
+            #mpiexec -n "$n" "$a" -fel $specific_ref_dir_fp/loganfel1.bin -$a_angle_arg $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil -$a_slope_arg $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin
+            #compare_rasters.py $specific_ref_dir_fp/bil"$a_angle_arg".bil $temp_dir/bil"$a_angle_arg"_"$p"_"$n".bil
+            #compare_rasters.py $specific_ref_dir_fp/bin"$a_slope_arg".bin $temp_dir/bin"$a_slope_arg"_"$p"_"$n".bin
 
         done
     done
